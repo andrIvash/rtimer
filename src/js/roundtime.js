@@ -26,10 +26,10 @@ class RoundTime {
         console.log('timer start');
         this.addTemplate();
 
-        this.daysElem = this.container.querySelector('.rt__sign-day'),
-        this.hoursElem = this.container.querySelector('.rt__sign-hour'),
-        this.minutesElem = this.container.querySelector('.rt__sign-min'),
-        this.secondsElem = this.container.querySelector('.rt__sign-sec'),
+        this.daysElem = this.container.querySelector('#rt-day'),
+        this.hoursElem = this.container.querySelector('#rt-hour'),
+        this.minutesElem = this.container.querySelector('#rt-min'),
+        this.secondsElem = this.container.querySelector('#rt-sec'),
         this.circleDay = this.container.querySelector('.rt__day'),
         this.circleHour = this.container.querySelector('.rt__hour'),
         this.circleMin = this.container.querySelector('.rt__min'),

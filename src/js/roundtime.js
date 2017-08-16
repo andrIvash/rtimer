@@ -17,23 +17,23 @@ class RoundTime {
         this.circleMin = null;
         this.circleSec = null;
         
-        // this.inner-timer__sign-day = null;
-        // this.inner-timer__sign-hour = null;
-        // this.inner-timer__sign-min = null;
+        // this.rt__sign-day = null;
+        // this.rt__sign-hour = null;
+        // this.rt__sign-min = null;
     }
     init() {
         this._deadline = new Date(Date.parse(new Date()) + parseInt(this.time));
         console.log('timer start');
         this.addTemplate();
 
-        this.daysElem = this.container.querySelector('.inner-timer__sign-day'),
-        this.hoursElem = this.container.querySelector('.inner-timer__sign-hour'),
-        this.minutesElem = this.container.querySelector('.inner-timer__sign-min'),
-        this.secondsElem = this.container.querySelector('.inner-timer__sign-sec'),
-        this.circleDay = this.container.querySelector('.inner-timer__day'),
-        this.circleHour = this.container.querySelector('.inner-timer__hour'),
-        this.circleMin = this.container.querySelector('.inner-timer__min'),
-        this.circleSec = this.container.querySelector('.inner-timer__sec');
+        this.daysElem = this.container.querySelector('.rt__sign-day'),
+        this.hoursElem = this.container.querySelector('.rt__sign-hour'),
+        this.minutesElem = this.container.querySelector('.rt__sign-min'),
+        this.secondsElem = this.container.querySelector('.rt__sign-sec'),
+        this.circleDay = this.container.querySelector('.rt__day'),
+        this.circleHour = this.container.querySelector('.rt__hour'),
+        this.circleMin = this.container.querySelector('.rt__min'),
+        this.circleSec = this.container.querySelector('.rt__sec');
         
         this.initializeClock();
     }
@@ -109,53 +109,51 @@ class RoundTime {
         if(this._timeInterval !== null) {
             clearInterval(this._timeInterval);
             console.log('timer stop');
+            // return new Promise((resolve, reject)=> {
+            //     resolve('timer stop')
+            // }, () => {
+            //     reject('timer fail')
+            // })
         }
     }
     addTemplate() {
         const fragment = document.createDocumentFragment();
         const newElement = document.createElement('div');
         const template = `
-                <div class="inner-timer__circle-wrap">
-                    <svg class="inner-timer__circle" width="90" height="90">
-                        <circle class="inner-timer__back" transform="rotate(-90, 45, 45)" r="40" cx="45" cy="45"></circle>
-                        <circle class="inner-timer__front inner-timer__day" transform="rotate(-90, 45, 45)" r="40" cx="45" cy="45"></circle>
-                    </svg>
-                    <div class="inner-timer__digit">
-                        <div class="inner-timer__sign inner-timer__sign-day">0</div>
-                        <div class="inner-timer__desq inner-timer__desq-day">дней</div>
-                    </div>
-                </div>
-                <div class="inner-timer__circle-wrap">
-                    <svg class="inner-timer__circle" width="90" height="90" viewbox="0 0 90 90">
-                        <circle class="inner-timer__back" transform="rotate(-90, 45, 45)" r="40" cx="45" cy="45"></circle>
-                        <circle class="inner-timer__front inner-timer__hour" transform="rotate(-90, 45, 45)" r="40" cx="45" cy="45"></circle>
-                    </svg>
-                    <div class="inner-timer__digit">
-                        <div class="inner-timer__sign inner-timer__sign-hour">0</div>
-                        <div class="inner-timer__desq inner-timer__desq-hour">часов</div>
-                    </div>
-                </div>
-                <div class="inner-timer__circle-wrap">
-                    <svg class="inner-timer__circle" width="90" height="90">
-                        <circle class="inner-timer__back" transform="rotate(-90, 45, 45)" r="40" cx="45" cy="45"></circle>
-                        <circle class="inner-timer__front inner-timer__min" transform="rotate(-90, 45, 45)" r="40" cx="45" cy="45"></circle>
-                    </svg>
-                    <div class="inner-timer__digit">
-                        <div class="inner-timer__sign inner-timer__sign-min">0</div>
-                        <div class="inner-timer__desq inner-timer__desq-min">минут</div>
-                    </div>
-                </div>
-                <div class="inner-timer__circle-wrap">
-                    <svg class="inner-timer__circle" width="90" height="90">
-                        <circle class="inner-timer__back" transform="rotate(-90, 45, 45)" r="40" cx="45" cy="45"></circle>
-                        <circle class="inner-timer__front inner-timer__sec" transform="rotate(-90, 45, 45)" r="40" cx="45" cy="45"></circle>
-                    </svg>
-                    <div class="inner-timer__digit">
-                        <div class="inner-timer__sign inner-timer__sign-sec">0</div>
-                        <div class="inner-timer__desq inner-timer__desq-sec">секунд</div>
-                    </div>
-                </div>
+            <svg class="rt__circle rt__circle_d" width="90" height="90" viewbox="0 0 90 90">
+                <g>
+                    <circle class="rt__back" transform="rotate(-90, 45, 45)" r="40" cx="45" cy="45"></circle>
+                    <circle class="rt__front rt__day" transform="rotate(-90, 45, 45)" r="40" cx="45" cy="45"></circle>
+                    <text class="rt__sign" id ="rt-day" x="50%" y="50%" text-anchor="middle"  dy="-5%" >0</text>
+                    <text class="rt__desq" id ="rt-day-text" x="50%" y="50%" text-anchor="middle"  dy="15%">дней</text>
+                </g>
+            </svg>
+            <svg class="rt__circle rt__circle_h" width="90" height="90" viewbox="0 0 90 90">
+                <g>
+                    <circle class="rt__back" transform="rotate(-90, 45, 45)" r="40" cx="45" cy="45"></circle>
+                    <circle class="rt__front rt__hour" transform="rotate(-90, 45, 45)" r="40" cx="45" cy="45"></circle>
+                    <text class="rt__sign" id ="rt-hour" x="50%" y="50%" text-anchor="middle"  dy="-5%" >0</text>
+                    <text class="rt__desq" id ="rt-hour-text" x="50%" y="50%" text-anchor="middle"  dy="15%">часов</text>
+                </g>
+            </svg>
+            <svg class="rt__circle rt__circle_m" width="90" height="90" viewbox="0 0 90 90">
+                <g>
+                    <circle class="rt__back" transform="rotate(-90, 45, 45)" r="40" cx="45" cy="45"></circle>
+                    <circle class="rt__front rt__min" transform="rotate(-90, 45, 45)" r="40" cx="45" cy="45"></circle>
+                    <text class="rt__sign" id ="rt-min" x="50%" y="50%" text-anchor="middle"  dy="-5%" >0</text>
+                    <text class="rt__desq" id ="rt-min-text" x="50%" y="50%" text-anchor="middle"  dy="15%">минут</text>
+                </g>
+            </svg>
+            <svg class="rt__circle rt__circle_s" width="90" height="90" viewbox="0 0 90 90">
+                <g>
+                    <circle class="rt__back" transform="rotate(-90, 45, 45)" r="40" cx="45" cy="45"></circle>
+                    <circle class="rt__front rt__sec" transform="rotate(-90, 45, 45)" r="40" cx="45" cy="45"></circle>
+                    <text class="rt__sign" id ="rt-sec" x="50%" y="50%" text-anchor="middle"  dy="-5%" >0</text>
+                    <text class="rt__desq" id ="rt-sec-text" x="50%" y="50%" text-anchor="middle"  dy="15%">секунд</text>
+                </g>
+            </svg>
         `;
+        newElement.classList.add('rt-timer')
         newElement.innerHTML = template;
         fragment.appendChild(newElement);
         this.container.appendChild(fragment);

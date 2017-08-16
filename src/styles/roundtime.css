@@ -1,0 +1,56 @@
+
+.inner-timer__circle-wrap {
+    display: inline-block;
+    position: relative;
+}
+
+.inner-timer__back {
+  fill:transparent;
+  stroke-width: 5px;
+  stroke: #313144;
+  stroke-dasharray: 252px; /* подбирается опытным путем */
+}
+
+.inner-timer__front {
+  fill:transparent;
+  stroke-width: 5px;
+  stroke: #fff;
+  stroke-dasharray: 252px;
+}
+
+.inner-timer__day {
+  stroke-dashoffset: 252px;  /* расчетная величина */
+}
+
+.inner-timer__hour {
+  stroke-dashoffset: 252px;  /* расчетная величина */
+}
+
+.inner-timer__min {
+  stroke-dashoffset: 252px; /* расчетная величина */
+}
+
+.inner-timer__digit {
+  display: block;
+  position: absolute;
+  width: 65px;
+  top: 13px;
+  left: 13px;
+  color: #fff;
+  text-align: center;
+}
+
+.inner-timer__sign {
+  display: block;
+  font-size: 26px;
+  font-family: "OpenSansSemiBold";
+}
+
+.inner-timer__desq {
+  display: block;
+  font-size: 14px;
+  font-family: "Open Sans";
+}
+    
+  
+  

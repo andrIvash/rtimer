@@ -4,17 +4,14 @@ import '../styles/roundtime.css'
 
 class RoundTime {
     
-    constructor(containerId, time) {
-        if (!(this instanceof RoundTime)) { 
-            return new RoundTime(containerId, time);
-        }
+    constructor(containerId) {
+       
         this.timerName = containerId;
         this.container = document.querySelector(containerId);
-        this.time = time;
+        this.time = null;
 
         
         this._privateData = {
-            timeInterval: null,
             deadline: null,
             
             daysElem: null,
@@ -30,7 +27,8 @@ class RoundTime {
         
     }
 
-    init() {
+    init(time) {
+        this.time = time;
         this._privateData.deadline = new Date(Date.parse(new Date()) + parseInt(this.time));
         console.log(`timer ${this.timerName} start`);
         this.addTemplate();
@@ -44,12 +42,19 @@ class RoundTime {
         this._privateData.circleMin = this.container.querySelector('.rt__min'),
         this._privateData.circleSec = this.container.querySelector('.rt__sec');
 
-        this.initializeClock();
+        this.updateClock();
+        return this;
     }
 
-    initializeClock() {
-        this.updateClock();
-        this._privateData.timeInterval = setInterval(() => {this.updateClock()}, 1000);
+    startTime() {
+        if(this._privateData.timeInterval !== null) {
+            console.log('set the timer time')
+        } else {
+            this.updateClock();
+            this._privateData.timeInterval = setInterval(() => {this.updateClock()}, 1000);
+        }
+
+        return this;
     }
 
     updateClock() {
@@ -58,11 +63,11 @@ class RoundTime {
         this.renderData(timeRemain);
 
         if (timeRemain.total <= 0) {
-            this.stopTimer();
+            this.stopTime();
         }
     }
     timeRemaining() {
-        const timeRemain = Date.parse(this._privateData.deadline) - Date.parse(new Date()),
+        const timeRemain = Date.parse(this._privateData.deadline) - Date.parse(new Date()), 
             seconds = Math.floor((timeRemain / 1000) % 60),
             minutes = Math.floor((timeRemain / 1000 / 60) % 60),
             hours = Math.floor((timeRemain / (1000 * 60 * 60)) % 24),
@@ -79,6 +84,7 @@ class RoundTime {
             offsetHours =  (total / 100) * (100 - (100/24 * hours)),
             offsetMinutes =  (total / 100) * (100 - (100/60 * minutes)),
             offsetSeconds =  (total / 100) * (100 - (100/60 * seconds));
+
         
         return {
             'total': timeRemain,
@@ -111,15 +117,11 @@ class RoundTime {
 
         console.log(`hours: ${data.h}, minutes: ${timeRemain.minutes}, seconds: ${data.s}`);
     }
-    stopTimer() {
+    stopTime() {
         if(this._privateData.timeInterval !== null) {
             clearInterval(this._privateData.timeInterval);
             console.log(`timer ${this.timerName} stop`);
-            // return new Promise((resolve, reject)=> {
-            //     resolve('timer stop')
-            // }, () => {
-            //     reject('timer fail')
-            // })
+            
         }
     }
     addTemplate() {

@@ -10,8 +10,9 @@ class RoundTime {
         this.container = document.querySelector(containerId);
         this.time = null;
 
-        
         this._privateData = {
+            isRunning: false,
+            callback: () => {},
             deadline: null,
             
             daysElem: null,
@@ -24,13 +25,14 @@ class RoundTime {
             circleMin: null,
             circleSec: null
         }
-        
     }
 
     init(time) {
-        this.time = time;
-        this._privateData.deadline = new Date(Date.parse(new Date()) + parseInt(this.time));
-        console.log(`timer ${this.timerName} start`);
+        if (time ) {
+            this.time = time;
+            this._privateData.deadline = new Date(Date.parse(new Date()) + parseInt(this.time));
+        }
+        
         this.addTemplate();
 
         this._privateData.daysElem = this.container.querySelector('.rt-day'),
@@ -46,14 +48,22 @@ class RoundTime {
         return this;
     }
 
-    startTime() {
-        if(this._privateData.timeInterval !== null) {
-            console.log('set the timer time')
-        } else {
-            this.updateClock();
-            this._privateData.timeInterval = setInterval(() => {this.updateClock()}, 1000);
+    startTime(time = null , callback = () => {}) {
+        if(this._privateData.isRunning) {
+            console.error('you should set time');
+        } else { 
+            this.time = typeof time !== 'function' && time !== null ? time : this.time;
+            if (this.time !== null && this.time !== '0') {
+                console.log(`timer ${this.timerName} start`);
+                this._privateData.deadline = new Date(Date.parse(new Date()) + parseInt(this.time));        
+                this._privateData.isRunning = true;
+                this._privateData.callback = callback;
+                this.updateClock();
+                this._privateData.timeInterval = setInterval(() => {this.updateClock()}, 1000);
+            } else {
+                console.error('you should set time');
+            }
         }
-
         return this;
     }
 
@@ -64,6 +74,8 @@ class RoundTime {
 
         if (timeRemain.total <= 0) {
             this.stopTime();
+            this._privateData.isRunning = false;
+            
         }
     }
     timeRemaining() {
@@ -117,13 +129,21 @@ class RoundTime {
 
         console.log(`hours: ${data.h}, minutes: ${timeRemain.minutes}, seconds: ${data.s}`);
     }
+
     stopTime() {
         if(this._privateData.timeInterval !== null) {
             clearInterval(this._privateData.timeInterval);
             console.log(`timer ${this.timerName} stop`);
+            this._privateData.isRunning = false;
             
         }
+        
+        this._privateData.callback();
+        return Date.parse(this._privateData.deadline) - Date.parse(new Date());
+         
+        
     }
+    
     addTemplate() {
         const fragment = document.createDocumentFragment();
         const newElement = document.createElement('div');

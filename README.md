@@ -8,8 +8,8 @@
 
 [Demo & Instructions][demo] | [Download][min]
 
-[demo]: 
-[min]: 
+[demo]: http://
+[min]: http://
 
 ## Getting started
 
@@ -96,6 +96,7 @@ timer.removeTime();  //leaves the display intact
 Start a timer and execute a function after a certain duration. You can use this to simulate a timed event.
 
 ```javascript
+ var timer = Timer('#block').init();
 //start a timer & execute a function in 30 seconds
 timer.startTime(30, () => {
     alert('Time up!');
@@ -106,25 +107,27 @@ timer.startTime(30, () => {
 Stop a timer in a certain time and then resume the timer.
 
 ```javascript
+ var timer = Timer('#block').init();
 //stop a timer in a certain time & execute a function & resume the timer
-    timer1.startTime(30); // - 30 sec
-    setTimeout(() => {
-        var resumeTime = timer1.stopTime();
-        customFn();
-        timer1.startTime(resumeTime);
-    }, 3000);
+timer.startTime(30); // - 30 sec
+setTimeout(() => {
+    var resumeTime = timer.stopTime();
+    customFn();
+    timer.startTime(resumeTime);
+}, 3000);
 
 ```
 
 Stop a timer in a certain time and then and then reset the timer.
 
 ```javascript
+var timer = Timer('#block').init();
 //Stop a timer in a certain time & reset the timer.
-    timer1.startTime(30); // - 30 sec
-    setTimeout(() => {
-        timer1.stopTime();
-        timer1.startTime(50); // - 50 sec
-    }, 3000);
+timer.startTime(30); // - 30 sec
+setTimeout(() => {
+    timer.stopTime();
+    timer.startTime(50); // - 50 sec
+}, 3000);
 
 ```
 

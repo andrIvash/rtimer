@@ -4,6 +4,7 @@
 - Start, Stop, Resume and Remove a timer inside any HTML element.
 - Get notified after specific time intervals.
 - Edit time while timer is running!
+- Localised on two languages (ru/en)
 - Enable __multiple timers__ on the same page.
 
 [Demo & Instructions][demo] | [Download][min]
@@ -64,7 +65,7 @@ var timer = Timer('#block').init(6, {options});
 
 var timer = Timer('#block').init(6, {
     color: {String} // Color of the text
-    lang: {String} // ru - eng localisation
+    lang: {String} // ru - en localisation
     });
 
 ```

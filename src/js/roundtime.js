@@ -28,8 +28,8 @@ class RoundTime {
     }
 
     init(time) {
-        if (time ) {
-            this.time = time;
+        if (time && parseInt(time) !== null) {
+            this.time = time * 1000;
             this._privateData.deadline = new Date(Date.parse(new Date()) + parseInt(this.time));
         }
         
@@ -52,8 +52,8 @@ class RoundTime {
         if(this._privateData.isRunning) {
             console.error('you should set time');
         } else { 
-            this.time = typeof time !== 'function' && time !== null ? time : this.time;
-            if (this.time !== null && this.time !== '0') {
+            this.time = typeof time !== 'function' && time !== null ? time * 1000 : this.time;
+            if (this.time !== 0) {
                 console.log(`timer ${this.timerName} start`);
                 this._privateData.deadline = new Date(Date.parse(new Date()) + parseInt(this.time));        
                 this._privateData.isRunning = true;
@@ -99,15 +99,15 @@ class RoundTime {
 
         
         return {
-            'total': timeRemain,
-            'days': days,
-            'hours': hours,
-            'minutes': minutes,
-            'seconds': seconds,
-            'off_days': offsetDays,
-            'off_hours': offsetHours,
-            'off_min': offsetMinutes,
-            'off_sec': offsetSeconds
+            'total': timeRemain || 0,
+            'days': days || 0,
+            'hours': hours || 0,
+            'minutes': minutes || 0, 
+            'seconds': seconds || 0,
+            'off_days': offsetDays || 0,
+            'off_hours': offsetHours || 0,
+            'off_min': offsetMinutes || 0,
+            'off_sec': offsetSeconds || 0
         }    
     }
     renderData(timeRemain) {

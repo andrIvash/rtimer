@@ -28,7 +28,7 @@ npm install -S timer.jquery
 ```javascript
 import Timer from ('rtimer.js');
 
-var timer = Timer('#block').init('6', {options});
+var timer = Timer('#block').init(6, {options});
 timer.startTime();
 
 ```
@@ -41,7 +41,7 @@ Alternatively you can [download][min] the Round Timer plugin and host it relativ
 <script>
 
   //start a timer
-  var timer = Timer('#block').init('6');  // -  6 sec , #block - DOM element id's
+  var timer = Timer('#block').init(6);  // -  6 sec , #block - DOM element id's
   timer.startTime();
 
 </script>
@@ -54,7 +54,7 @@ To start a timer with options:
 
 ```javascript
 
-var timer = Timer('#block').init('6', {options});
+var timer = Timer('#block').init(6, {options});
 
 ```
 
@@ -62,8 +62,9 @@ var timer = Timer('#block').init('6', {options});
 
 ```javascript
 
-var timer = Timer('#block').init('6', {
+var timer = Timer('#block').init(6, {
     color: {String} // Color of the text
+    lang: {String} // ru - eng localisation
     });
 
 ```
@@ -109,7 +110,7 @@ Stop a timer in a certain time and then resume the timer.
 ```javascript
  var timer = Timer('#block').init();
 //stop a timer in a certain time & execute a function & resume the timer
-timer.startTime(30); // - 30 sec
+timer.startTime30); // - 30 sec
 setTimeout(() => {
     var resumeTime = timer.stopTime();
     customFn();

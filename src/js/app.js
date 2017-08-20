@@ -8,9 +8,9 @@ const time_stmp2 = 10 + '000'
 
 
 
-const timer1 = Timer('#timer1').init();
+const timer1 = Timer('#timer1').init('000');
 
-timer1.startTime('0000');
+timer1.startTime();
 //const timer2 = Timer('#timer2').init(time_stmp2);
 
 

@@ -64,8 +64,10 @@ var timer = Timer('#block').init(6, {options});
 ```javascript
 
 var timer = Timer('#block').init(6, {
-    color: {String} // Color of the text
-    lang: {String} // ru - en localisation
+    tcolor: {String} // Color of the text, default = 
+    rcolor: {String} // Primary color, default =
+    bcolor: {String} // Background Color, default = 
+    lang: {String} // ru - en localisation, default = ru
     });
 
 ```
@@ -111,10 +113,10 @@ Stop a timer in a certain time and then resume the timer.
 ```javascript
  var timer = Timer('#block').init();
 //stop a timer in a certain time & execute a function & resume the timer
-timer.startTime30); // - 30 sec
+timer.startTime(30); // - 30 sec
 setTimeout(() => {
     var resumeTime = timer.stopTime();
-    customFn();
+    customFn(); // - some function
     timer.startTime(resumeTime);
 }, 3000);
 

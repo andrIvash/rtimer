@@ -23,15 +23,34 @@ class RoundTime {
             circleDay:null,
             circleHour: null,
             circleMin: null,
-            circleSec: null
+            circleSec: null,
+
+            language: 'ru',
+            tcolor: 'grey',
+            rcolor: 'grey',
+            bcolor: 'grey'
+
         }
     }
 
-    init(time) {
+    init(time, obj) {
         if (time && parseInt(time) !== null) {
             this.time = time * 1000;
             this._privateData.deadline = new Date(Date.parse(new Date()) + parseInt(this.time));
         }
+        if(arguments[1] && arguments[1] === Object(arguments[1])) {
+            (obj.tcolor && obj.tcolor !== 'grey') ? this._privateData.tcolor = obj.tcolor : this._privateData.tcolor = 'grey';
+            (obj.rcolor && obj.rcolor !== 'grey') ? this._privateData.rcolor = obj.rcolor : this._privateData.rcolor = 'grey'; 
+            (obj.bcolor && obj.bcolor !== 'grey') ? this._privateData.bcolor = obj.bcolor : this._privateData.bcolor = 'grey'; 
+            (obj.lang && obj.lang === 'en') ? this._privateData.language = 'en' : this._privateData.language = 'ru';
+
+            console.log({
+                lang: this._privateData.language,
+                tcolor: this._privateData.tcolor,
+                rcolor: this._privateData.rcolor,
+                bcolor: this._privateData.bcolor
+            })
+        } 
         
         this.addTemplate();
 
@@ -57,7 +76,7 @@ class RoundTime {
                 console.log(`timer ${this.timerName} start`);
                 this._privateData.deadline = new Date(Date.parse(new Date()) + parseInt(this.time));        
                 this._privateData.isRunning = true;
-                this._privateData.callback = callback;
+                typeof time === 'function' ? this._privateData.callback = time : this._privateData.callback = callback;
                 this.updateClock();
                 this._privateData.timeInterval = setInterval(() => {this.updateClock()}, 1000);
             } else {
